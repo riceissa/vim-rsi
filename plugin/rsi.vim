@@ -59,6 +59,17 @@ endfunction
 cnoremap <expr> <C-U> <SID>ctrl_u()
 cnoremap <expr> <C-Y> pumvisible() ? "\<C-Y>" : "\<C-R>-"
 
+inoremap <expr> <C-L> (pumvisible() <bar><bar> &insertmode) ? '<C-L>' : '<C-\><C-O>' . <SID>EmacsCtrlL()
+function! s:EmacsCtrlL()
+  if abs(winline()) <= 1+&scrolloff
+    return 'zb'
+  elseif abs(winline() - (1+winheight(0))/2) <= 1
+    return 'zt'
+  else
+    return 'zz'
+  endif
+endfunction
+
 if exists('g:rsi_no_meta')
   finish
 endif
