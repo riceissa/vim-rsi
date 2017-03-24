@@ -35,6 +35,17 @@ if empty(mapcheck('<C-G>', 'c'))
   cmap <script> <C-G> <C-C>
 endif
 
+inoremap <expr> <C-L> (pumvisible() <bar><bar> &insertmode) ? '<C-L>' : '<C-\><C-O>' . <SID>EmacsCtrlL()
+function! s:EmacsCtrlL()
+  if abs(winline()) <= 1+&scrolloff
+    return 'zb'
+  elseif abs(winline() - (1+winheight(0))/2) <= 1
+    return 'zt'
+  else
+    return 'zz'
+  endif
+endfunction
+
 noremap! <expr> <SID>transposition getcmdpos()>strlen(getcmdline())?"\<Left>":getcmdpos()>1?'':"\<Right>"
 noremap! <expr> <SID>transpose "\<BS>\<Right>".matchstr(getcmdline()[0 : getcmdpos()-2], '.$')
 cmap   <script> <C-T> <SID>transposition<SID>transpose
