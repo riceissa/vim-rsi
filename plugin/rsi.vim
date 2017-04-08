@@ -31,10 +31,6 @@ inoremap <expr> <C-E> col('.')>strlen(getline('.'))?"\<Lt>C-E>":"\<Lt>End>"
 inoremap <expr> <C-F> col('.')>strlen(getline('.'))?"\<Lt>C-F>":"\<Lt>Right>"
 cnoremap <expr> <C-F> getcmdpos()>strlen(getcmdline())?&cedit:"\<Lt>Right>"
 
-if empty(mapcheck('<C-G>', 'c'))
-  cmap <script> <C-G> <C-C>
-endif
-
 inoremap <expr> <C-L> (pumvisible() <bar><bar> &insertmode) ? '<C-L>' : '<C-\><C-O>' . <SID>EmacsCtrlL()
 function! s:EmacsCtrlL()
   if abs(winline()) <= 1+&scrolloff
@@ -45,10 +41,6 @@ function! s:EmacsCtrlL()
     return 'zz'
   endif
 endfunction
-
-noremap! <expr> <SID>transposition getcmdpos()>strlen(getcmdline())?"\<Left>":getcmdpos()>1?'':"\<Right>"
-noremap! <expr> <SID>transpose "\<BS>\<Right>".matchstr(getcmdline()[0 : getcmdpos()-2], '.$')
-cmap   <script> <C-T> <SID>transposition<SID>transpose
 
 if exists('g:rsi_no_meta')
   finish
