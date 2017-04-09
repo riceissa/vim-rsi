@@ -31,7 +31,7 @@ inoremap <expr> <C-E> col('.')>strlen(getline('.'))?"\<Lt>C-E>":"\<Lt>End>"
 inoremap <expr> <C-F> col('.')>strlen(getline('.'))?"\<Lt>C-F>":"\<Lt>Right>"
 cnoremap <expr> <C-F> getcmdpos()>strlen(getcmdline())?&cedit:"\<Lt>Right>"
 
-inoremap <expr> <C-L> (pumvisible() <bar><bar> &insertmode) ? '<C-L>' : '<C-\><C-O>' . <SID>EmacsCtrlL()
+inoremap <expr> <C-L> &insertmode<bar><bar>pumvisible()?"\<Lt>C-L>":"\<Lt>C-\>\<Lt>C-O>".<SID>EmacsCtrlL()
 function! s:EmacsCtrlL()
   if abs(winline()) <= 1+&scrolloff
     return 'zb'
