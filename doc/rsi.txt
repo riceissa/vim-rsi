@@ -22,6 +22,13 @@ MAPS                                            *rsi-maps*
 <C-b>                   Go backwards one character.  On a blank line, kill it
                         and go back to the previous line.
 
+                                                *rsi-CTRL-C*
+<C-c>                   Close the |ins-completion-menu|.  This is provided
+                        because CTRL-E is clobbered (see |rsi-CTRL-E|).  This
+                        way, it is easy to jump to the end of the line after
+                        performing a completion, but there is still a way to
+                        close the completion menu.
+
                                                 *rsi-CTRL-D*
 <C-d>                   Delete character in front of cursor.  Falls back to
                         |i_CTRL-D| or |c_CTRL-D| at the end of the line.
@@ -35,13 +42,11 @@ MAPS                                            *rsi-maps*
 <C-f>                   Move forward one character.  Falls back to
                         |i_CTRL-F| or |c_CTRL-F| at the end of the line.
 
-                                                *rsi-CTRL-G*
-<C-g>                   Return to normal mode from the |cmdline|.
-
-                                                *rsi-CTRL-T*
-<C-t>                   Transpose two characters.  This is mapped in command
-                        line mode only, as |i_CTRL-T| is too important to
-                        clobber.
+                                                *rsi-CTRL-L*
+<C-l>                   Reposition the edit window, keeping the cursor on the
+                        same line.  The position cycles center, top, bottom.
+                        This is meant to imitate Emacs's C-l.  This mapping
+                        only works in insert mode.
 
                                                 *rsi-META-BS*
 <M-BS>                  Delete backward one word.
