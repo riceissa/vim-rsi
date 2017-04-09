@@ -41,7 +41,7 @@ endfunction
 cnoremap <expr> <C-U> <SID>ctrl_u()
 cnoremap <expr> <C-Y> pumvisible() ? "\<C-Y>" : "\<C-R>-"
 
-inoremap <expr> <C-L> (pumvisible() <bar><bar> &insertmode) ? '<C-L>' : '<C-\><C-O>' . <SID>EmacsCtrlL()
+inoremap <expr> <C-L> &insertmode<bar><bar>pumvisible()?"\<Lt>C-L>":"\<Lt>C-\>\<Lt>C-O>".<SID>EmacsCtrlL()
 function! s:EmacsCtrlL()
   if abs(winline()) <= 1+&scrolloff
     return 'zb'
