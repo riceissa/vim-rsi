@@ -69,6 +69,9 @@ function! s:MapMeta() abort
   noremap!        <M-p> <Up>
   noremap!        <M-BS> <C-W>
   noremap!        <M-C-h> <C-W>
+  inoremap        <M-q> <C-\><C-O>gwip
+  nnoremap        <M-q> gwip
+  vnoremap        <M-q> gw
 endfunction
 
 if has("gui_running") || has('nvim')
@@ -81,6 +84,7 @@ else
   silent! exe "set <F33>=\<Esc>p"
   silent! exe "set <F34>=\<Esc>\<C-?>"
   silent! exe "set <F35>=\<Esc>\<C-H>"
+  silent! exe "set <F36>=\<Esc>q"
   noremap!        <F29> <S-Left>
   noremap!        <F30> <S-Right>
   noremap!        <F31> <C-O>dw
@@ -89,6 +93,10 @@ else
   noremap!        <F33> <Up>
   noremap!        <F34> <C-W>
   noremap!        <F35> <C-W>
+  inoremap        <F36> <C-\><C-O>gwip
+  nnoremap        <F36> gwip
+  vnoremap        <F36> gw
+
   if has('terminal')
     tnoremap      <F29> <Esc>b
     tnoremap      <F30> <Esc>f
@@ -97,6 +105,7 @@ else
     tnoremap      <F33> <Esc>p
     tnoremap      <F34> <Esc><C-?>
     tnoremap      <F35> <Esc><C-H>
+    tnoremap      <F36> <Esc>q
   endif
   if &encoding ==# 'utf-8' && (has('unix') || has('win32'))
     try
