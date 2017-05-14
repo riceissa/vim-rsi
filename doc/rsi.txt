@@ -66,6 +66,10 @@ MAPS                                            *rsi-maps*
                                                 *rsi-META-p*
 <M-p>                   Equivalent to |c_<Up>| or |i_<Up>|.
 
+                                                *rsi-META-q*
+<M-q>                   Format the current paragraph as with |gw|. This is
+                        meant to imitate fill-paragraph from Emacs.
+
 In the terminal, the meta key sends escape, so mapping these would require
 mappings starting with escape in insert mode.  This makes Vim appear to lag
 for a second if you actually press just escape.  Instead, rsi.vim makes

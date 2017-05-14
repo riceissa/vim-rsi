@@ -57,6 +57,9 @@ noremap!        <M-BS> <C-W>
 noremap!        <M-f> <S-Right>
 noremap!        <M-n> <Down>
 noremap!        <M-p> <Up>
+inoremap        <M-q> <C-\><C-O>gwip
+nnoremap        <M-q> gwip
+vnoremap        <M-q> gw
 
 if !has("gui_running") && !has('nvim')
   silent! exe "set <S-Left>=\<Esc>b"
@@ -66,16 +69,19 @@ if !has("gui_running") && !has('nvim')
   silent! exe "set <F33>=\<Esc>p"
   silent! exe "set <F34>=\<Esc>\<C-?>"
   silent! exe "set <F35>=\<Esc>\<C-H>"
+  silent! exe "set <F36>=\<Esc>q"
   map! <F31> <M-d>
   map! <F32> <M-n>
   map! <F33> <M-p>
   map! <F34> <M-BS>
   map! <F35> <M-BS>
+  map! <F36> <M-q>
   map <F31> <M-d>
   map <F32> <M-n>
   map <F33> <M-p>
   map <F34> <M-BS>
   map <F35> <M-BS>
+  map <F36> <M-q>
 endif
 
 " vim:set et sw=2:
