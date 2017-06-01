@@ -62,6 +62,12 @@ noremap!        <M-p> <Up>
 inoremap        <M-q> <C-\><C-O>gwip
 nnoremap        <M-q> gwip
 vnoremap        <M-q> gw
+nnoremap        <M-l> guew
+inoremap        <M-l> <C-O>gue<C-O>w
+nnoremap        <M-u> gUew
+inoremap        <M-u> <C-O>gUe<C-O>w
+nnoremap        <M-c> gUlw
+inoremap        <M-c> <C-O>gUl<C-O>w
 
 if !has("gui_running") && !has('nvim')
   silent! exe "set <S-Left>=\<Esc>b"
@@ -72,18 +78,30 @@ if !has("gui_running") && !has('nvim')
   silent! exe "set <F34>=\<Esc>\<C-?>"
   silent! exe "set <F35>=\<Esc>\<C-H>"
   silent! exe "set <F36>=\<Esc>q"
+  silent! exe "set <F37>=\<Esc>l"
+  " After F37 Vim stops mapping function keys man 5 terminfo lists function
+  " keys going all the way up to F63, so it's unclear to me why Vim doesn't go
+  " as far. Going down to the 20s seems to work. *shurgs*
+  silent! exe "set <F21>=\<Esc>u"
+  silent! exe "set <F22>=\<Esc>c"
   map! <F31> <M-d>
   map! <F32> <M-n>
   map! <F33> <M-p>
   map! <F34> <M-BS>
   map! <F35> <M-BS>
   map! <F36> <M-q>
+  map! <F37> <M-l>
+  map! <F21> <M-u>
+  map! <F22> <M-c>
   map <F31> <M-d>
   map <F32> <M-n>
   map <F33> <M-p>
   map <F34> <M-BS>
   map <F35> <M-BS>
   map <F36> <M-q>
+  map <F37> <M-l>
+  map <F21> <M-u>
+  map <F22> <M-c>
 endif
 
 " vim:set et sw=2:
