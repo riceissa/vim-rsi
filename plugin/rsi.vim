@@ -43,6 +43,20 @@ endfunction
 cnoremap <expr> <C-U> <SID>ctrl_u()
 cnoremap <expr> <C-Y> pumvisible() ? "\<C-Y>" : "\<C-R>-"
 
+cnoremap   <C-X><C-K> <C-\>e<SID>CmdlineKillLine()<CR>
+function! s:CmdlineKillLine() abort
+  let pos = getcmdpos()
+  if pos == 1
+    " Vim's string indexing is messed up so I think we need a special case
+    " here. getcmdline()[0 : -1] would select the whole string.
+    return ""
+  else
+    " Subtract two because right index is inclusive and because getcmdpos()
+    " starts at 1.
+    return getcmdline()[0 : pos-2]
+  endif
+endfunction
+
 inoremap <expr> <C-L> &insertmode<bar><bar>pumvisible()?"\<Lt>C-L>":"\<Lt>C-\>\<Lt>C-O>".<SID>EmacsCtrlL()
 function! s:EmacsCtrlL()
   if abs(winline()) <= 1+&scrolloff
