@@ -33,6 +33,10 @@ MAPS                                            *rsi-maps*
 <C-d>                   Delete character in front of cursor.  Falls back to
                         |i_CTRL-D| or |c_CTRL-D| at the end of the line.
 
+                                                *rsi-CTRL-X_CTRL-D*
+<C-x><C-d>              Access Vim's built-in |c_CTRL-D|.  This mapping only
+                        works in command line mode.
+
                                                 *rsi-CTRL-E*
 <C-e>                   Go to end of line.  Falls back to |i_CTRL-E| if
                         already at the end of the line.  (|c_CTRL-E| already
@@ -51,6 +55,14 @@ MAPS                                            *rsi-maps*
                         important to clobber.  Removed by Issa as he never
                         uses it.
 
+                                                *rsi-CTRL-X_CTRL-F*
+<C-x><C-f>              Access Vim's built-in |c_CTRL-F|.  This mapping only
+                        works in command line mode.
+
+                                                *rsi-CTRL-X_CTRL-K*
+<C-x><C-k>              Delete to the end of the line.  This mapping only works
+                        in command line mode.
+
                                                 *rsi-CTRL-L*
 <C-l>                   Reposition the edit window, keeping the cursor on the
                         same line.  The position cycles center, top, bottom.
@@ -63,11 +75,21 @@ MAPS                                            *rsi-maps*
                                                 *rsi-META-b*
 <M-b>                   Go backwards one word.
 
+                                                *rsi-META-c*
+<M-c>                   Capitalize the current word (starting from the cursor
+                        position) and move to the next word.  This mapping does
+                        not work in command line mode.
+
                                                 *rsi-META-d*
 <M-d>                   Delete forwards one word.
 
                                                 *rsi-META-f*
 <M-f>                   Go forwards one word.
+
+                                                *rsi-META-l*
+<M-l>                   Make the current word (starting from the cursor
+                        position) lower case and move to the next word. This
+                        mapping does not work in command line mode.
 
                                                 *rsi-META-n*
 <M-n>                   Equivalent to |c_<Down>| or |i_<Down>|.
@@ -78,6 +100,11 @@ MAPS                                            *rsi-maps*
                                                 *rsi-META-q*
 <M-q>                   Format the current paragraph as with |gw|. This is
                         meant to imitate fill-paragraph from Emacs.
+
+                                                *rsi-META-u*
+<M-u>                   Make the current word (starting from the cursor
+                        position) upper case and move to the next word. This
+                        mapping does not work in command line mode.
 
 In the terminal, the meta key sends escape, so mapping these would require
 mappings starting with escape in insert mode.  This makes Vim appear to lag

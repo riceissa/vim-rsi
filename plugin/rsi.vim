@@ -108,7 +108,7 @@ else
   silent! exe "set <F35>=\<Esc>\<C-H>"
   silent! exe "set <F36>=\<Esc>q"
   silent! exe "set <F37>=\<Esc>l"
-  " After F37 Vim stops mapping function keys man 5 terminfo lists function
+  " After F37 Vim stops mapping function keys. `man 5 terminfo` lists function
   " keys going all the way up to F63, so it's unclear to me why Vim doesn't go
   " as far. Going down to the 20s seems to work. *shurgs*
   silent! exe "set <F21>=\<Esc>u"
