@@ -57,7 +57,7 @@ function! s:CmdlineKillLine() abort
   endif
 endfunction
 
-inoremap <expr> <C-L> &insertmode<bar><bar>pumvisible()?"\<Lt>C-L>":"\<Lt>C-\>\<Lt>C-O>".<SID>EmacsCtrlL()
+inoremap <expr> <C-L> &insertmode<bar><bar>pumvisible()?"\<Lt>C-L>":"\<Lt>C-O>".<SID>EmacsCtrlL()
 function! s:EmacsCtrlL()
   if abs(winline()) <= 1+&scrolloff
     return 'zb'
