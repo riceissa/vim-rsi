@@ -73,7 +73,7 @@ noremap!        <M-BS> <C-W>
 noremap!        <M-f> <S-Right>
 noremap!        <M-n> <Down>
 noremap!        <M-p> <Up>
-inoremap        <M-q> <C-\><C-O>gwip
+inoremap        <M-q> <C-G>u<C-\><C-O>gwip
 nnoremap        <M-q> gwip
 vnoremap        <M-q> gw
 nnoremap        <M-l> guew
