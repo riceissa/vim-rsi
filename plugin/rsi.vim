@@ -85,7 +85,7 @@ function! s:MapMeta() abort
   noremap!        <M-p> <Up>
   noremap!        <M-BS> <C-W>
   noremap!        <M-C-h> <C-W>
-  inoremap        <M-q> <C-\><C-O>gwip
+  inoremap        <M-q> <C-G>u<C-\><C-O>gwip
   nnoremap        <M-q> gwip
   vnoremap        <M-q> gw
   nnoremap        <M-l> guew
@@ -121,7 +121,7 @@ else
   noremap!        <F33> <Up>
   noremap!        <F34> <C-W>
   noremap!        <F35> <C-W>
-  inoremap        <F36> <C-\><C-O>gwip
+  inoremap        <F36> <C-G>u<C-\><C-O>gwip
   nnoremap        <F36> gwip
   vnoremap        <F36> gw
   nnoremap        <F37> guew
