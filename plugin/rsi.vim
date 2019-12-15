@@ -95,7 +95,7 @@ if !has("gui_running") && !has('nvim')
   silent! exe "set <F37>=\<Esc>l"
   " After F37 Vim stops mapping function keys. `man 5 terminfo` lists function
   " keys going all the way up to F63, so it's unclear to me why Vim doesn't go
-  " as far. Going down to the 20s seems to work. *shurgs*
+  " as far. Going down to the 20s seems to work. *shrugs*
   silent! exe "set <F21>=\<Esc>u"
   silent! exe "set <F22>=\<Esc>c"
   map! <F31> <M-d>
