@@ -66,8 +66,9 @@ MAPS                                            *rsi-maps*
                                                 *rsi-CTRL-L*
 <C-l>                   Reposition the edit window, keeping the cursor on the
                         same line.  The position cycles center, top, bottom.
-                        This is meant to imitate Emacs's C-l.  This mapping
-                        only works in insert mode.
+                        This is meant to imitate Emacs's C-l
+                        (recenter-top-bottom).  This mapping only works in
+                        insert mode.
 
                                                 *rsi-META-BS*
 <M-BS>                  Delete backward one word.
@@ -78,7 +79,8 @@ MAPS                                            *rsi-maps*
                                                 *rsi-META-c*
 <M-c>                   Capitalize the current word (starting from the cursor
                         position) and move to the next word.  This mapping does
-                        not work in command line mode.
+                        not work in command line mode.  This imitates Emacs's
+                        capitalize-word command.
 
                                                 *rsi-META-d*
 <M-d>                   Delete forwards one word.
@@ -89,7 +91,8 @@ MAPS                                            *rsi-maps*
                                                 *rsi-META-l*
 <M-l>                   Make the current word (starting from the cursor
                         position) lower case and move to the next word. This
-                        mapping does not work in command line mode.
+                        mapping does not work in command line mode.  This
+                        imitates Emacs's downcase-word command.
 
                                                 *rsi-META-n*
 <M-n>                   Equivalent to |c_<Down>| or |i_<Down>|.
@@ -104,7 +107,8 @@ MAPS                                            *rsi-maps*
                                                 *rsi-META-u*
 <M-u>                   Make the current word (starting from the cursor
                         position) upper case and move to the next word. This
-                        mapping does not work in command line mode.
+                        mapping does not work in command line mode.  This
+                        imitates Emacs's upcase-word command.
 
 In the terminal, the meta key sends escape, so mapping these would require
 mappings starting with escape in insert mode.  This makes Vim appear to lag
