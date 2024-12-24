@@ -20,6 +20,13 @@ overriding built-in Vim functionality.
 * C-d, C-e, and C-f are mapped such that they perform the Readline behavior in
   the middle of the line and the Vim behavior at the end.  (Think about it.)
 
+## Fork notes
+
+Click [here](https://github.com/tpope/vim-rsi/compare/master...riceissa:master)
+to see the differences in this fork.  It removes a few things from the upstream
+that I (Issa Rice) don't use or want (e.g. C-t to transpose), and adds a few
+things from Emacs that I really missed in Vim (e.g. C-l to recenter the page).
+
 ## Installation
 
 If you don't have a preferred installation method, I recommend
