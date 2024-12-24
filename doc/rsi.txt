@@ -46,6 +46,15 @@ MAPS                                            *rsi-maps*
 <C-f>                   Move forward one character.  Falls back to
                         |i_CTRL-F| or |c_CTRL-F| at the end of the line.
 
+                                                *rsi-CTRL-G*
+<C-g>                   Removed, as it conflicts with |c_CTRL-G|.
+
+                                                *rsi-CTRL-T*
+<C-t>                   (Removed) Transpose two characters.  This is mapped
+                        in command line mode only, as |i_CTRL-T| is too
+                        important to clobber.  Removed by Issa as he never
+                        uses it.
+
                                                 *rsi-CTRL-X_CTRL-F*
 <C-x><C-f>              Access Vim's built-in |c_CTRL-F|.  This mapping only
                         works in command line mode.

@@ -33,6 +33,16 @@ inoremap <expr> <C-F> col('.')>strlen(getline('.'))?"\<Lt>C-F>":"\<Lt>Right>"
 cnoremap <expr> <C-F> getcmdpos()>strlen(getcmdline())?&cedit:"\<Lt>Right>"
 cnoremap   <C-X><C-F> <C-F>
 
+function! s:ctrl_u()
+  if getcmdpos() > 1
+    let @- = getcmdline()[:getcmdpos()-2]
+  endif
+  return "\<C-U>"
+endfunction
+
+cnoremap <expr> <C-U> <SID>ctrl_u()
+cnoremap <expr> <C-Y> pumvisible() ? "\<C-Y>" : "\<C-R>-"
+
 cnoremap   <C-X><C-K> <C-\>e<SID>CmdlineKillLine()<CR>
 function! s:CmdlineKillLine() abort
   let pos = getcmdpos()
@@ -66,26 +76,31 @@ if &encoding ==# 'latin1' && has('gui_running') && !empty(findfile('plugin/sensi
   set encoding=utf-8
 endif
 
-noremap!        <M-b> <S-Left>
-noremap!        <M-d> <C-O>dw
-cnoremap        <M-d> <S-Right><C-W>
-noremap!        <M-BS> <C-W>
-noremap!        <M-f> <S-Right>
-noremap!        <M-n> <Down>
-noremap!        <M-p> <Up>
-inoremap        <M-q> <C-G>u<C-\><C-O>gwip
-nnoremap        <M-q> gwip
-vnoremap        <M-q> gw
-nnoremap        <M-l> guew
-inoremap        <M-l> <C-O>gue<C-O>w
-nnoremap        <M-u> gUew
-inoremap        <M-u> <C-O>gUe<C-O>w
-nnoremap        <M-c> gUlw
-inoremap        <M-c> <C-O>gUl<C-O>w
+function! s:MapMeta() abort
+  noremap!        <M-b> <S-Left>
+  noremap!        <M-f> <S-Right>
+  noremap!        <M-d> <C-O>dw
+  cnoremap        <M-d> <S-Right><C-W>
+  noremap!        <M-n> <Down>
+  noremap!        <M-p> <Up>
+  noremap!        <M-BS> <C-W>
+  noremap!        <M-C-h> <C-W>
+  inoremap        <M-q> <C-G>u<C-\><C-O>gwip
+  nnoremap        <M-q> gwip
+  vnoremap        <M-q> gw
+  nnoremap        <M-l> guew
+  inoremap        <M-l> <C-O>gue<C-O>w
+  nnoremap        <M-u> gUew
+  inoremap        <M-u> <C-O>gUe<C-O>w
+  nnoremap        <M-c> gUlw
+  inoremap        <M-c> <C-O>gUl<C-O>w
+endfunction
 
-if !has("gui_running") && !has('nvim')
-  silent! exe "set <S-Left>=\<Esc>b"
-  silent! exe "set <S-Right>=\<Esc>f"
+if has("gui_running") || has('nvim')
+  call s:MapMeta()
+else
+  silent! exe "set <F29>=\<Esc>b"
+  silent! exe "set <F30>=\<Esc>f"
   silent! exe "set <F31>=\<Esc>d"
   silent! exe "set <F32>=\<Esc>n"
   silent! exe "set <F33>=\<Esc>p"
@@ -98,24 +113,50 @@ if !has("gui_running") && !has('nvim')
   " as far. Going down to the 20s seems to work. *shrugs*
   silent! exe "set <F21>=\<Esc>u"
   silent! exe "set <F22>=\<Esc>c"
-  map! <F31> <M-d>
-  map! <F32> <M-n>
-  map! <F33> <M-p>
-  map! <F34> <M-BS>
-  map! <F35> <M-BS>
-  map! <F36> <M-q>
-  map! <F37> <M-l>
-  map! <F21> <M-u>
-  map! <F22> <M-c>
-  map <F31> <M-d>
-  map <F32> <M-n>
-  map <F33> <M-p>
-  map <F34> <M-BS>
-  map <F35> <M-BS>
-  map <F36> <M-q>
-  map <F37> <M-l>
-  map <F21> <M-u>
-  map <F22> <M-c>
+  noremap!        <F29> <S-Left>
+  noremap!        <F30> <S-Right>
+  noremap!        <F31> <C-O>dw
+  cnoremap        <F31> <S-Right><C-W>
+  noremap!        <F32> <Down>
+  noremap!        <F33> <Up>
+  noremap!        <F34> <C-W>
+  noremap!        <F35> <C-W>
+  inoremap        <F36> <C-G>u<C-\><C-O>gwip
+  nnoremap        <F36> gwip
+  vnoremap        <F36> gw
+  nnoremap        <F37> guew
+  inoremap        <F37> <C-O>gue<C-O>w
+  nnoremap        <F21> gUew
+  inoremap        <F21> <C-O>gUe<C-O>w
+  nnoremap        <F22> gUlw
+  inoremap        <F22> <C-O>gUl<C-O>w
+
+  if has('terminal')
+    tnoremap      <F29> <Esc>b
+    tnoremap      <F30> <Esc>f
+    tnoremap      <F31> <Esc>d
+    tnoremap      <F32> <Esc>n
+    tnoremap      <F33> <Esc>p
+    tnoremap      <F34> <Esc><C-?>
+    tnoremap      <F35> <Esc><C-H>
+    tnoremap      <F36> <Esc>q
+    tnoremap      <F37> <Esc>l
+    tnoremap      <F21> <Esc>u
+    tnoremap      <F22> <Esc>c
+  endif
+  if &encoding ==# 'utf-8' && (has('unix') || has('win32'))
+    try
+      set encoding=cp949
+      call s:MapMeta()
+    finally
+      set encoding=utf-8
+    endtry
+  else
+    augroup rsi_gui
+      autocmd!
+      autocmd GUIEnter * call s:MapMeta()
+    augroup END
+  endif
 endif
 
 " vim:set et sw=2:
