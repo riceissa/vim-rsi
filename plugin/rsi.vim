@@ -43,6 +43,24 @@ endfunction
 cnoremap <expr> <C-U> <SID>ctrl_u()
 cnoremap <expr> <C-Y> pumvisible() ? "\<C-Y>" : "\<C-R>-"
 
+" Emacs's M-q respects comments and only formats the text inside the current
+" comment, but Vim's gwip has no notion of syntax so it just formats
+" everything in the 'paragraph', even if that means merging code and comments.
+" The 'Vim way' seems to be to :set textwidth=78 or whatever and then just let
+" Vim insert the newlines for you, but I tend to not like that because I've
+" had bad experiences of Vim messing up the newlines. So the following is a
+" workaround such that if you happen to be writing a comment, it will do a gww
+" to only format the current line rather than doing a whole gwip to format the
+" paragraph. If you need to reformat the entire comment later, you can still
+" visually select the comment and then to M-q later.
+function! s:fill_paragraph()
+  if synID(line('.'), col('.')-1, 0)->synIDattr('name') =~# 'Comment'
+    return "\<C-G>u\<C-\>\<C-O>gww"
+  else
+    return "\<C-G>u\<C-\>\<C-O>gwip"
+  endif
+endfunction
+
 cnoremap   <C-X><C-K> <C-\>e<SID>CmdlineKillLine()<CR>
 function! s:CmdlineKillLine() abort
   let pos = getcmdpos()
@@ -87,7 +105,7 @@ function! s:MapMeta() abort
   noremap!        <M-p> <Up>
   noremap!        <M-BS> <C-W>
   noremap!        <M-C-h> <C-W>
-  inoremap        <M-q> <C-G>u<C-\><C-O>gwip
+  inoremap <expr> <M-q> <SID>fill_paragraph()
   nnoremap        <M-q> gwip
   vnoremap        <M-q> gw
   nnoremap        <M-l> guew
@@ -123,7 +141,7 @@ else
   noremap!        <F33> <Up>
   noremap!        <F34> <C-W>
   noremap!        <F35> <C-W>
-  inoremap        <F36> <C-G>u<C-\><C-O>gwip
+  inoremap <expr> <F36> <SID>fill_paragraph()
   nnoremap        <F36> gwip
   vnoremap        <F36> gw
   nnoremap        <F37> guew
