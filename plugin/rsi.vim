@@ -53,11 +53,23 @@ cnoremap <expr> <C-Y> pumvisible() ? "\<C-Y>" : "\<C-R>-"
 " to only format the current line rather than doing a whole gwip to format the
 " paragraph. If you need to reformat the entire comment later, you can still
 " visually select the comment and then to M-q later.
-function! s:fill_paragraph()
+function! s:fill_paragraph_insert()
+  " The -1 is because in insert mode, apparently the column where the cursor
+  " is is not considered a 'Comment' syntax type even when one is typing a
+  " comment! So we have to look at the previous character (i.e. the character
+  " that was just typed) to see if we're in a comment.
   if synID(line('.'), col('.')-1, 0)->synIDattr('name') =~# 'Comment'
     return "\<C-G>u\<C-\>\<C-O>gww"
   else
     return "\<C-G>u\<C-\>\<C-O>gwip"
+  endif
+endfunction
+
+function! s:fill_paragraph_normal()
+  if synID(line('.'), col('.'), 0)->synIDattr('name') =~# 'Comment'
+    return "gww"
+  else
+    return "gwip"
   endif
 endfunction
 
@@ -105,8 +117,8 @@ function! s:MapMeta() abort
   noremap!        <M-p> <Up>
   noremap!        <M-BS> <C-W>
   noremap!        <M-C-h> <C-W>
-  inoremap <expr> <M-q> <SID>fill_paragraph()
-  nnoremap        <M-q> gwip
+  inoremap <expr> <M-q> <SID>fill_paragraph_insert()
+  nnoremap <expr> <M-q> <SID>fill_paragraph_normal()
   vnoremap        <M-q> gw
   nnoremap        <M-l> guew
   inoremap        <M-l> <C-O>gue<C-O>w
@@ -141,8 +153,8 @@ else
   noremap!        <F33> <Up>
   noremap!        <F34> <C-W>
   noremap!        <F35> <C-W>
-  inoremap <expr> <F36> <SID>fill_paragraph()
-  nnoremap        <F36> gwip
+  inoremap <expr> <F36> <SID>fill_paragraph_insert()
+  nnoremap <expr> <F36> <SID>fill_paragraph_normal()
   vnoremap        <F36> gw
   nnoremap        <F37> guew
   inoremap        <F37> <C-O>gue<C-O>w
