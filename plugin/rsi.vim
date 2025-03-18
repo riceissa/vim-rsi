@@ -52,7 +52,7 @@ cnoremap <expr> <C-Y> pumvisible() ? "\<C-Y>" : "\<C-R>-"
 " workaround such that if you happen to be writing a comment, it will do a gww
 " to only format the current line rather than doing a whole gwip to format the
 " paragraph. If you need to reformat the entire comment later, you can still
-" visually select the comment and then to M-q later.
+" visually select the comment and then do M-q later.
 function! s:fill_paragraph_insert()
   " The -1 is because in insert mode, apparently the column where the cursor
   " is is not considered a 'Comment' syntax type even when one is typing a
